@@ -5,7 +5,7 @@
 \title{Create a Turk Task Project}
 \usage{
 make_project(path, key.value, key.path = file.path(dirname(path), "key.csv"),
-  ...)
+  additional.cols = NULL, ...)
 }
 \arguments{
 \item{path}{A path to the projects dirctory plau the project name.}
@@ -14,6 +14,9 @@ make_project(path, key.value, key.path = file.path(dirname(path), "key.csv"),
 project in the shinyTurk.}
 
 \item{key.path}{A path the where `key.csv` is.}
+
+\item{additional.cols}{Additional column  values to add to the key.  For 
+example the key may contain an additional institution name column.}
 
 \item{\ldots}{ignored.}
 }

@@ -6,7 +6,9 @@
 #' @param path A path to the projects dirctory plau the project name.
 #' @param key.value A value (key code) that will be used in to log into the 
 #' project in the shinyTurk.
-#' @param key.path A path the where `key.csv` is.  
+#' @param key.path A path the where `key.csv` is.
+#' @param additional.cols Additional column  values to add to the key.  For 
+#' example the key may contain an additional institution name column.  
 #' @param \ldots ignored.
 #' @export
 #' @return Returns the \code{project.path} so it can be used with 
@@ -36,7 +38,7 @@
 #'         type = "checkbox"        
 #'     )   
 #' }
-make_project <- function(path, key.value, key.path = file.path(dirname(path), 'key.csv'), ...){
+make_project <- function(path, key.value, key.path = file.path(dirname(path), 'key.csv'), additional.cols = NULL, ...){
 
     path <- gsub("\\s+", "_", path)
     if (path == Sys.getenv("R_HOME")) stop("path can not be `R_HOME`")
@@ -67,7 +69,7 @@ make_project <- function(path, key.value, key.path = file.path(dirname(path), 'k
     suppressWarnings(invisible(dir.create(path, recursive = TRUE)))
    
     if (!missing(key.value)) {
-        key[nrow(key) + 1,] <- c(key.value, basename(path))
+        key[nrow(key) + 1,] <- c(key.value, basename(path), additional.cols)
         write.csv(key, file = key.path, row.names=FALSE)
     }
 
